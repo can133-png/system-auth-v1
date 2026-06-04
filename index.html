@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistem Kilitli</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background: #020617; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+    
+    .login-container {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 40px;
+        text-align: center;
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .icon { font-size: 3rem; margin-bottom: 20px; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; text-shadow: 0 0 20px #60a5fa; } }
+
+    h2 { color: #93c5fd; margin-bottom: 10px; font-weight: 400; }
+    p { color: #bfdbfe; font-size: 0.9rem; margin-bottom: 30px; opacity: 0.8; }
+
+    input {
+        width: 100%;
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(96, 165, 250, 0.3);
+        border-radius: 10px;
+        color: white;
+        font-size: 1.1rem;
+        text-align: center;
+        outline: none;
+        transition: 0.3s;
+        margin-bottom: 20px;
+    }
+    
+    input:focus { border-color: #60a5fa; box-shadow: 0 0 15px rgba(96, 165, 250, 0.4); }
+
+    button {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(90deg, #2563eb, #3b82f6);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover { background: linear-gradient(90deg, #1d4ed8, #2563eb); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4); }
+
+    .error-msg {
+        color: #f87171;
+        font-size: 0.9rem;
+        margin-top: 15px;
+        min-height: 20px;
+        opacity: 0;
+        transition: 0.3s;
+    }
+</style>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="icon">🔒</div>
+    <h2>Yetkisiz Erişim</h2>
+    <p>Bu alana giriş sadece yetkili kişiye özeldir. Lütfen anahtarı girin.</p>
+    
+    <input type="password" id="passwordInput" placeholder="Şifreyi Giriniz" onkeypress="handleKeyPress(event)">
+    <button onclick="checkAccess()">Giriş Yap</button>
+    
+    <div class="error-msg" id="errorMsg">Bağlantı reddedildi...</div>
+</div>
+
+<script>
+    function checkAccess() {
+        const input = document.getElementById("passwordInput").value.toLowerCase().trim();
+        const errorMsg = document.getElementById("errorMsg");
+        
+        if(input === "") {
+            errorMsg.style.opacity = "1";
+            errorMsg.innerText = "Boş bırakılamaz.";
+            return;
+        }
+
+
+        window.location.href = input + ".html";
+    }
+
+    function handleKeyPress(e) {
+        if(e.key === "Enter") {
+            checkAccess();
+        }
+    }
+</script>
+
+</body>
+</html>

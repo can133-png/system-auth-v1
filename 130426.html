@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Küboşummmmm 💙</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#020617;
+overflow-x:hidden;
+color:white;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+.title{
+font-size:5rem;
+font-weight:bold;
+background:linear-gradient(90deg,#60a5fa,#93c5fd,#dbeafe);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:0 0 30px #3b82f6;
+}
+
+.typing{
+margin-top:20px;
+font-size:1.4rem;
+color:#bfdbfe;
+border-right:2px solid white;
+white-space:nowrap;
+overflow:hidden;
+width:0;
+animation:typing 6s steps(60,end) forwards,
+blink .8s infinite;
+}
+
+@keyframes typing{
+from{width:0}
+to{width:100%}
+}
+
+@keyframes blink{
+50%{
+border-color:transparent;
+}
+}
+
+.heart{
+font-size:120px;
+margin-top:30px;
+animation:pulse 1.2s infinite;
+filter:drop-shadow(0 0 20px #60a5fa);
+}
+
+@keyframes pulse{
+0%,100%{
+transform:scale(1);
+}
+50%{
+transform:scale(1.15);
+}
+}
+
+.section{
+padding:120px 10%;
+text-align:center;
+}
+
+.glass{
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,.1);
+border-radius:25px;
+padding:40px;
+max-width:900px;
+margin:auto;
+box-shadow:0 0 40px rgba(59,130,246,.2);
+}
+
+h2{
+font-size:2.5rem;
+margin-bottom:30px;
+color:#93c5fd;
+}
+
+p{
+font-size:1.2rem;
+line-height:2;
+}
+
+/* --- SAYAÇ ALANI TASARIMI --- */
+.counter-container {
+display: flex;
+justify-content: center;
+gap: 20px;
+margin-top: 30px;
+flex-wrap: wrap;
+}
+
+.counter-box {
+background: rgba(255, 255, 255, 0.03);
+padding: 20px;
+border-radius: 15px;
+border: 1px solid rgba(255, 255, 255, 0.08);
+min-width: 120px;
+box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+backdrop-filter: blur(5px);
+}
+
+.counter-box span {
+font-size: 2.8rem;
+font-weight: bold;
+color: #60a5fa;
+text-shadow: 0 0 15px #3b82f6;
+display: block;
+}
+
+.counter-box p {
+font-size: 0.9rem;
+color: #93c5fd;
+margin-top: 5px;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+/* --- CSS ZAMBAK TASARIMI --- */
+.lily-container {
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 40px 0 20px 0;
+height: 120px;
+}
+
+.lily {
+position: relative;
+width: 70px;
+height: 70px;
+animation: floatLily 3s ease-in-out infinite;
+}
+
+.petal {
+position: absolute;
+bottom: 0;
+left: 0;
+width: 70px;
+height: 70px;
+background: linear-gradient(135deg, #ffffff, #bfdbfe);
+border-radius: 0 60% 0 60%;
+transform-origin: 0 100%;
+box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+transition: 0.5s;
+}
+
+.petal:nth-child(1) { transform: rotate(45deg) scale(1); background: linear-gradient(135deg, #ffffff, #93c5fd); z-index: 3; }
+.petal:nth-child(2) { transform: rotate(20deg) scale(0.9); z-index: 2; }
+.petal:nth-child(3) { transform: rotate(70deg) scale(0.9); z-index: 2; }
+.petal:nth-child(4) { transform: rotate(-5deg) scale(0.7); z-index: 1; }
+.petal:nth-child(5) { transform: rotate(95deg) scale(0.7); z-index: 1; }
+
+@keyframes floatLily {
+0%, 100% { transform: translateY(0) scale(1); }
+50% { transform: translateY(-15px) scale(1.05); filter: drop-shadow(0 0 25px #dbeafe); }
+}
+
+.love-bar{
+margin-top:30px;
+height:30px;
+background:rgba(255,255,255,.1);
+border-radius:50px;
+overflow:hidden;
+}
+
+.love-fill{
+height:100%;
+width:100%;
+background:linear-gradient(90deg,#2563eb,#60a5fa,#bfdbfe);
+animation:loading 4s ease forwards;
+}
+
+@keyframes loading{
+from{ width:0; }
+to{ width:100%; }
+}
+
+.infinity{
+font-size:7rem;
+font-weight:bold;
+color:#60a5fa;
+text-shadow:0 0 30px #3b82f6;
+}
+
+.footer{
+padding:60px;
+text-align:center;
+color:#93c5fd;
+}
+
+.floating-heart{
+position:fixed;
+pointer-events:none;
+animation:floatUp 3s linear forwards;
+font-size: 28px;
+z-index: 9999;
+}
+
+@keyframes floatUp{
+0%{
+opacity:1;
+transform:translate(0, 0) scale(1) rotate(0deg);
+}
+100%{
+opacity:0;
+transform:translate(var(--x), var(--y)) scale(1.8) rotate(var(--rot));
+}
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<section class="hero">
+
+<div class="title">AŞKIMMMMMMM 💙</div>
+
+<div class="typing">
+Bazı insanlar hayatımıza gelir, bazıları ise hayatımız olur...
+</div>
+
+<div class="heart">
+💙
+</div>
+
+</section>
+
+<section class="section">
+<div class="glass">
+<h2>İyi Ki Karşılaştık Dedikten Beri...</h2>
+<div class="counter-container">
+<div class="counter-box"><span id="days">00</span><p>Gün</p></div>
+<div class="counter-box"><span id="hours">00</span><p>Saat</p></div>
+<div class="counter-box"><span id="minutes">00</span><p>Dakika</p></div>
+<div class="counter-box"><span id="seconds">00</span><p>Saniye</p></div>
+</div>
+<p style="margin-top:30px; font-size:1.1rem; color:#bfdbfe; font-style: italic;">
+13 Nisan 2026'dan beri ömrümün en güzel saniyelerini yaşıyorum... 💙
+</p>
+</div>
+</section>
+
+<section class="section">
+<div class="glass">
+<h2>Senin İçin Bir Zambak 🤍</h2>
+<p>
+Biliyorum zambaklara bayılıyorsun.<br>
+Sana verdiğim o güzel zambağın yanına, bu dijital dünyada<br>
+sonsuza kadar solmayacak ve sadece senin için parlayacak bir zambak daha kodladım.
+</p>
+<div class="lily-container">
+    <div class="lily">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+    </div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="glass">
+
+<h2>Neden Sen?</h2>
+
+<p>
+Çünkü yüzlerce karmaşık düşüncenin arasında,<br>
+zihnimin durulup soluklandığı tek liman sensin.<br><br>
+
+Çünkü ekrana düşen tek bir mesajın bile,<br>
+en kötü günümü anında aydınlatmaya yetiyor.<br><br>
+
+Çünkü gözlerine baktığımda hissettiğim o tarifsiz huzuru ve güveni,<br>
+koca dünyada başka hiçbir şeye değişmem.<br><br>
+
+Sen benim için sadece "biri" değilsin...<br>
+Sen, bu hayatın bana verdiği en güzel hediyesin.
+</p>
+
+</div>
+</section>
+
+<section class="section">
+<div class="glass">
+
+<h2>Sana Olan Sevgimin Ölçüsü</h2>
+
+<div class="infinity">∞</div>
+
+<div class="love-bar">
+<div class="love-fill"></div>
+</div>
+
+<p style="margin-top:25px;">
+Bu çubuğun dolması sadece birkaç saniye sürüyor...<br>
+Ama sana olan sevgimi yaşamaya bir ömür yetmez.<br><br>
+
+Gökyüzünün bir sınırı, okyanusların bir dibi var;<br>
+ama kalbimdeki yerinin uçsuz bucaksızlığını anlatacak hiçbir ölçü birimi yok.<br><br>
+
+Sonsuzluk dedikleri şey, gözlerine baktığım o tek bir anın yanında<br>
+sadece sıradan bir kelime kalır.
+</p>
+
+</div>
+</section>
+
+<section class="section">
+<div class="glass">
+
+<h2>Bir Gerçek</h2>
+
+<p>
+Eğer gökyüzündeki tüm yıldızlar,<br>
+seni neden sevdiğimi anlatan sebepler olsaydı,<br>
+yine de eksik kalırdı.<br><br>
+
+Çünkü bazı hisler anlatılmaz,<br>
+sadece yaşanır.<br>
+💙
+</p>
+
+</div>
+</section>
+
+<div class="footer">
+yavrummmmmmmmmmmmmmmmmmm için tasarlandı 💙
+</div>
+
+<script>
+
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let stars=[];
+
+for(let i=0;i<200;i++){
+stars.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+s:Math.random()*0.5
+});
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="#60a5fa";
+
+stars.forEach(star=>{
+ctx.beginPath();
+ctx.arc(star.x,star.y,star.r,0,Math.PI*2);
+ctx.fill();
+
+star.y+=star.s;
+
+if(star.y>canvas.height){
+star.y=0;
+}
+});
+
+requestAnimationFrame(animate);
+}
+
+animate();
+
+// --- GELİŞTİRİLMİŞ KALP & ZAMBAK PATLAMASI EFEKTİ ---
+document.addEventListener("click",(e)=>{
+
+for(let i=0;i<10;i++){
+
+const heart=document.createElement("div");
+
+// Rastgele sembol seçimi
+const symbols = ["💙", "🪷", "✨", "🤍", "💮"];
+heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+
+heart.classList.add("floating-heart");
+
+heart.style.left=e.clientX+"px";
+heart.style.top=e.clientY+"px";
+
+const angle = Math.random() * Math.PI * 2;
+const distance = Math.random() * 150 + 50;
+const moveX = Math.cos(angle) * distance;
+const moveY = (Math.sin(angle) * distance) - 100; 
+const rotation = (Math.random() - 0.5) * 360; 
+
+heart.style.setProperty('--x', `${moveX}px`);
+heart.style.setProperty('--y', `${moveY}px`);
+heart.style.setProperty('--rot', `${rotation}deg`);
+
+heart.style.animationDuration = (Math.random() * 1.5 + 1.5) + "s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},3000);
+
+}
+
+});
+
+// --- CANLI ZAMAN SAYAÇ SCRIPT'İ ---
+const targetDate = new Date("2026-04-13T00:00:00").getTime();
+
+function updateCounter() {
+const now = new Date().getTime();
+const difference = now - targetDate;
+
+const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+}
+
+setInterval(updateCounter, 1000);
+updateCounter(); 
+
+</script>
+
+</body>
+</html>
