@@ -240,21 +240,33 @@ transform:translate(var(--x), var(--y)) scale(1.8) rotate(var(--rot));
 }
 
 /* ========================================= */
-/* 📱 MOBİL UYUMLULUK (RESPONSIVE) KODLARI 📱 */
+/* 📱 ULTRA ESTETİK MOBİL (RESPONSIVE) KODU 📱 */
 /* ========================================= */
 
 @media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+        width: 100vw;
+    }
+    
+    .hero {
+        padding: 0 15px;
+    }
+
+    /* Başlık ekran genişliğine göre dinamik küçülecek, asla taşmayacak */
     .title {
-        font-size: 3rem; /* Mobilde başlık küçültüldü */
+        font-size: 13vw; 
+        line-height: 1.2;
     }
     
     .typing {
-        font-size: 1.1rem;
-        white-space: normal; /* Mobilde metnin alt satıra geçmesine izin ver */
-        border-right: none;
+        font-size: 1rem;
+        white-space: normal;
+        border: none;
         width: 100%;
-        animation: fadeInText 3s ease-in forwards; /* Daktilo yerine yumuşak geçiş */
+        animation: fadeInText 2s ease-in forwards;
         opacity: 0;
+        margin-top: 15px;
     }
     
     @keyframes fadeInText {
@@ -263,34 +275,39 @@ transform:translate(var(--x), var(--y)) scale(1.8) rotate(var(--rot));
     }
     
     .heart {
-        font-size: 80px; /* Kalp küçültüldü */
-        margin-top: 20px;
+        font-size: 70px;
+        margin-top: 15px;
     }
     
     .section {
-        padding: 60px 5%; /* Kenar boşlukları daraltıldı */
+        padding: 60px 15px; 
     }
     
     .glass {
-        padding: 25px 15px; /* Kart içi boşluklar mobilde optimize edildi */
+        padding: 25px 15px; 
         border-radius: 20px;
+        width: 100%;
     }
     
     h2 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
     
     p {
-        font-size: 1.05rem;
+        font-size: 1rem;
     }
     
+    /* Sayaç Kutularını Mobilde 2x2 Simetrik Izgara (Grid) Yaptık */
     .counter-container {
-        gap: 10px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 20px;
     }
     
     .counter-box {
-        min-width: 70px;
-        padding: 15px 10px;
+        min-width: unset;
+        padding: 15px 5px;
     }
     
     .counter-box span {
@@ -298,12 +315,13 @@ transform:translate(var(--x), var(--y)) scale(1.8) rotate(var(--rot));
     }
     
     .counter-box p {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
     }
     
     .lily-container {
-        transform: scale(0.8); /* Zambak mobilde daha zarif dursun diye küçültüldü */
-        height: 100px;
+        transform: scale(0.8);
+        height: 90px;
+        margin: 20px 0;
     }
     
     .infinity {
@@ -311,8 +329,8 @@ transform:translate(var(--x), var(--y)) scale(1.8) rotate(var(--rot));
     }
     
     .footer {
-        padding: 30px;
-        font-size: 0.9rem;
+        padding: 30px 15px;
+        font-size: 0.85rem;
     }
 }
 
@@ -336,6 +354,7 @@ Bazı insanlar hayatımıza gelir, bazıları ise hayatımız olur...
 
 </section>
 
+<!-- CANLI ZAMAN SAYAÇ ALANI -->
 <section class="section">
 <div class="glass">
 <h2>İyi Ki Karşılaştık Dedikten Beri...</h2>
@@ -351,6 +370,7 @@ Bazı insanlar hayatımıza gelir, bazıları ise hayatımız olur...
 </div>
 </section>
 
+<!-- ZAMBAK BÖLÜMÜ -->
 <section class="section">
 <div class="glass">
 <h2>Senin İçin Bir Zambak 🤍</h2>
@@ -371,6 +391,7 @@ sonsuza kadar solmayacak ve sadece senin için parlayacak bir zambak daha kodlad
 </div>
 </section>
 
+<!-- NEDEN SEN BÖLÜMÜ -->
 <section class="section">
 <div class="glass">
 
@@ -393,6 +414,7 @@ Sen, bu hayatın bana verdiği en güzel hediyesin.
 </div>
 </section>
 
+<!-- ULTRA ROMANTİK ÖLÇÜ BÖLÜMÜ -->
 <section class="section">
 <div class="glass">
 
