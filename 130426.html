@@ -239,6 +239,83 @@ transform:translate(var(--x), var(--y)) scale(1.8) rotate(var(--rot));
 }
 }
 
+/* ========================================= */
+/* 📱 MOBİL UYUMLULUK (RESPONSIVE) KODLARI 📱 */
+/* ========================================= */
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 3rem; /* Mobilde başlık küçültüldü */
+    }
+    
+    .typing {
+        font-size: 1.1rem;
+        white-space: normal; /* Mobilde metnin alt satıra geçmesine izin ver */
+        border-right: none;
+        width: 100%;
+        animation: fadeInText 3s ease-in forwards; /* Daktilo yerine yumuşak geçiş */
+        opacity: 0;
+    }
+    
+    @keyframes fadeInText {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .heart {
+        font-size: 80px; /* Kalp küçültüldü */
+        margin-top: 20px;
+    }
+    
+    .section {
+        padding: 60px 5%; /* Kenar boşlukları daraltıldı */
+    }
+    
+    .glass {
+        padding: 25px 15px; /* Kart içi boşluklar mobilde optimize edildi */
+        border-radius: 20px;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    p {
+        font-size: 1.05rem;
+    }
+    
+    .counter-container {
+        gap: 10px;
+    }
+    
+    .counter-box {
+        min-width: 70px;
+        padding: 15px 10px;
+    }
+    
+    .counter-box span {
+        font-size: 2rem;
+    }
+    
+    .counter-box p {
+        font-size: 0.7rem;
+    }
+    
+    .lily-container {
+        transform: scale(0.8); /* Zambak mobilde daha zarif dursun diye küçültüldü */
+        height: 100px;
+    }
+    
+    .infinity {
+        font-size: 5rem;
+    }
+    
+    .footer {
+        padding: 30px;
+        font-size: 0.9rem;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -416,6 +493,7 @@ heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
 
 heart.classList.add("floating-heart");
 
+// Tıklanan yere göre mobilde de düzgün çalışması için clientX/Y kullanıyoruz
 heart.style.left=e.clientX+"px";
 heart.style.top=e.clientY+"px";
 
