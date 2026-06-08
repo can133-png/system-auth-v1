@@ -387,7 +387,10 @@ animation: spinMusic 3s linear infinite;
 
 <canvas id="stars"></canvas>
 
-<div id="youtube-player" style="position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px;"></div>
+<audio id="bgMusic" loop>
+    <source src="sarki.mp3" type="audio/mpeg">
+    Tarayıcınız ses oynatmayı desteklemiyor.
+</audio>
 
 <div class="music-btn" id="musicBtn">
     <span class="music-icon" id="musicIcon">🎵</span> <span id="musicText">Ses Kapalı</span>
@@ -426,9 +429,9 @@ Bazı insanlar hayatımıza gelir, bazıları ise hayatımız olur...
 <div class="glass">
 <h2>Senin İçin Bir Zambak 🤍</h2>
 <p>
-Biliyorum zambaklara bayılıyorsun.<br>
+Biliyorum zambaklara bayılıgorsun.<br>
 Sana verdiğim o güzel zambağın yanına, bu dijital dünyada<br>
-sonsuza kadar solmayacak ve sadece senin için parlayacak bir zambak daha kodladım.
+sonsuza kadar solmayacak bir zambak daha kodladım.
 </p>
 <div class="lily-container">
     <div class="lily">
@@ -551,80 +554,41 @@ requestAnimationFrame(animate);
 
 animate();
 
-// --- YOUTUBE IFRAME API MOTORU (Müzik Bypass) ---
-let ytPlayer;
-let isMusicPlaying = false;
+// --- HARDWARE MP3 PLAYER KONTROLCÜSÜ ---
+const bgMusic = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicBtn");
 const musicIcon = document.getElementById("musicIcon");
 const musicText = document.getElementById("musicText");
+let isMusicPlaying = false;
 
-// 1. YouTube IFrame API Scriptini Yükle
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+bgMusic.volume = 0.35; // %35 Premium fon müziği seviyesi
 
-// 2. API Hazır Olunca Oynatıcıyı Kur
-function onYouTubeIframeAPIReady() {
-    ytPlayer = new YT.Player('youtube-player', {
-        height: '0',
-        width: '0',
-        videoId: 'k2HBV2EtSDA', // Mabel Matiz - A Canım
-        playerVars: {
-            'autoplay': 0,
-            'controls': 0,
-            'disablekb': 1,
-            'loop': 1,
-            'playlist': 'k2HBV2EtSDA', // Loop için gerekli
-            'rel': 0,
-            'showinfo': 0,
-            'modestbranding': 1
-        },
-        events: {
-            'onReady': onPlayerReady
-        }
-    });
-}
-
-// 3. Oynatıcı Hazır Olduğunda Ses Seviyesini Sabitle
-function onPlayerReady(event) {
-    ytPlayer.setVolume(35); // Senin istediğin gibi fısıltı/fon modunda (%35)
-}
-
-// 4. Müzik Başlatma/Durdurma Fonksiyonu
 function toggleMusic() {
-    if (!ytPlayer || typeof ytPlayer.getPlayerState !== 'function') return;
-    
-    let state = ytPlayer.getPlayerState();
-    
-    if (state === 1) { // Eğer çalıyorsa
-        ytPlayer.pauseVideo();
+    if (bgMusic.paused) {
+        bgMusic.play().then(() => {
+            isMusicPlaying = true;
+            musicIcon.classList.add("spinning");
+            musicText.innerText = "Çalıyor";
+        }).catch((err) => console.log("Mobil Autoplay engellendi, etkileşim bekleniyor.", err));
+    } else {
+        bgMusic.pause();
         isMusicPlaying = false;
         musicIcon.classList.remove("spinning");
         musicText.innerText = "Duraklatıldı";
-    } else { // Çalmıyorsa
-        ytPlayer.playVideo();
-        isMusicPlaying = true;
-        musicIcon.classList.add("spinning");
-        musicText.innerText = "Çalıyor";
     }
 }
 
-// Butona Tıklama Kontrolü
 musicBtn.addEventListener("click", (e) => {
     e.stopPropagation(); 
     toggleMusic();
 });
 
-// --- KALP & ZAMBAK PATLAMASI VE OTOMATİK MÜZİK EFEKTİ ---
+// --- KALP & ZAMBAK PATLAMASI VE MOBİL OTOMATİK BAŞLATICI ---
 document.addEventListener("click",(e)=>{
 
-// İlk Tıklamada Müziği Gizlice Başlatıyoruz (Tarayıcı Engelini Aşmak İçin)
-if (!isMusicPlaying && ytPlayer && typeof ytPlayer.playVideo === 'function') {
-    let state = ytPlayer.getPlayerState();
-    if (state !== 1) {
-        toggleMusic();
-    }
+// İlk dokunuşta mobil tarayıcı kalkanını bypass edip müziği tetikliyoruz
+if (!isMusicPlaying) {
+    toggleMusic();
 }
 
 for(let i=0;i<10;i++){
