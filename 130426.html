@@ -239,6 +239,47 @@ transform:translate(var(--x), var(--y)) scale(1.8) rotate(var(--rot));
 }
 }
 
+/* --- MÜZİK BUTONU TASARIMI --- */
+.music-btn {
+position: fixed;
+bottom: 25px;
+right: 25px;
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255, 255, 255, 0.1);
+padding: 12px 20px;
+border-radius: 50px;
+color: #93c5fd;
+font-size: 0.9rem;
+font-weight: bold;
+cursor: pointer;
+z-index: 1000;
+display: flex;
+align-items: center;
+gap: 10px;
+box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+transition: 0.3s;
+}
+
+.music-btn:hover {
+background: rgba(255, 255, 255, 0.1);
+transform: scale(1.05);
+border-color: rgba(96, 165, 250, 0.4);
+}
+
+.music-icon {
+display: inline-block;
+font-size: 1.2rem;
+}
+
+.spinning {
+animation: spinMusic 3s linear infinite;
+}
+
+@keyframes spinMusic {
+100% { transform: rotate(360deg); }
+}
+
 /* ========================================= */
 /* 📱 ULTRA ESTETİK MOBİL (RESPONSIVE) KODU 📱 */
 /* ========================================= */
@@ -253,7 +294,6 @@ transform:translate(var(--x), var(--y)) scale(1.8) rotate(var(--rot));
         padding: 0 15px;
     }
 
-    /* Başlık ekran genişliğine göre dinamik küçülecek, asla taşmayacak */
     .title {
         font-size: 13vw; 
         line-height: 1.2;
@@ -297,7 +337,6 @@ transform:translate(var(--x), var(--y)) scale(1.8) rotate(var(--rot));
         font-size: 1rem;
     }
     
-    /* Sayaç Kutularını Mobilde 2x2 Simetrik Izgara (Grid) Yaptık */
     .counter-container {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -331,6 +370,14 @@ transform:translate(var(--x), var(--y)) scale(1.8) rotate(var(--rot));
     .footer {
         padding: 30px 15px;
         font-size: 0.85rem;
+        margin-bottom: 50px;
+    }
+    
+    .music-btn {
+        bottom: 15px;
+        right: 15px;
+        padding: 10px 15px;
+        font-size: 0.8rem;
     }
 }
 
@@ -339,6 +386,12 @@ transform:translate(var(--x), var(--y)) scale(1.8) rotate(var(--rot));
 <body>
 
 <canvas id="stars"></canvas>
+
+<div id="youtube-player" style="position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px;"></div>
+
+<div class="music-btn" id="musicBtn">
+    <span class="music-icon" id="musicIcon">🎵</span> <span id="musicText">Ses Kapalı</span>
+</div>
 
 <section class="hero">
 
@@ -354,7 +407,6 @@ Bazı insanlar hayatımıza gelir, bazıları ise hayatımız olur...
 
 </section>
 
-<!-- CANLI ZAMAN SAYAÇ ALANI -->
 <section class="section">
 <div class="glass">
 <h2>İyi Ki Karşılaştık Dedikten Beri...</h2>
@@ -365,12 +417,11 @@ Bazı insanlar hayatımıza gelir, bazıları ise hayatımız olur...
 <div class="counter-box"><span id="seconds">00</span><p>Saniye</p></div>
 </div>
 <p style="margin-top:30px; font-size:1.1rem; color:#bfdbfe; font-style: italic;">
-13 Nisan 2026'dan beri ömrümün en güzel saniyelerini yaşıyorum... 💙
+13 Nisan 2026 saat 19:58'den beri ömrümün en güzel saniyelerini yaşıyorum... 💙
 </p>
 </div>
 </section>
 
-<!-- ZAMBAK BÖLÜMÜ -->
 <section class="section">
 <div class="glass">
 <h2>Senin İçin Bir Zambak 🤍</h2>
@@ -391,7 +442,6 @@ sonsuza kadar solmayacak ve sadece senin için parlayacak bir zambak daha kodlad
 </div>
 </section>
 
-<!-- NEDEN SEN BÖLÜMÜ -->
 <section class="section">
 <div class="glass">
 
@@ -414,7 +464,6 @@ Sen, bu hayatın bana verdiği en güzel hediyesin.
 </div>
 </section>
 
-<!-- ULTRA ROMANTİK ÖLÇÜ BÖLÜMÜ -->
 <section class="section">
 <div class="glass">
 
@@ -502,20 +551,90 @@ requestAnimationFrame(animate);
 
 animate();
 
-// --- GELİŞTİRİLMİŞ KALP & ZAMBAK PATLAMASI EFEKTİ ---
+// --- YOUTUBE IFRAME API MOTORU (Müzik Bypass) ---
+let ytPlayer;
+let isMusicPlaying = false;
+const musicBtn = document.getElementById("musicBtn");
+const musicIcon = document.getElementById("musicIcon");
+const musicText = document.getElementById("musicText");
+
+// 1. YouTube IFrame API Scriptini Yükle
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// 2. API Hazır Olunca Oynatıcıyı Kur
+function onYouTubeIframeAPIReady() {
+    ytPlayer = new YT.Player('youtube-player', {
+        height: '0',
+        width: '0',
+        videoId: 'k2HBV2EtSDA', // Mabel Matiz - A Canım
+        playerVars: {
+            'autoplay': 0,
+            'controls': 0,
+            'disablekb': 1,
+            'loop': 1,
+            'playlist': 'k2HBV2EtSDA', // Loop için gerekli
+            'rel': 0,
+            'showinfo': 0,
+            'modestbranding': 1
+        },
+        events: {
+            'onReady': onPlayerReady
+        }
+    });
+}
+
+// 3. Oynatıcı Hazır Olduğunda Ses Seviyesini Sabitle
+function onPlayerReady(event) {
+    ytPlayer.setVolume(35); // Senin istediğin gibi fısıltı/fon modunda (%35)
+}
+
+// 4. Müzik Başlatma/Durdurma Fonksiyonu
+function toggleMusic() {
+    if (!ytPlayer || typeof ytPlayer.getPlayerState !== 'function') return;
+    
+    let state = ytPlayer.getPlayerState();
+    
+    if (state === 1) { // Eğer çalıyorsa
+        ytPlayer.pauseVideo();
+        isMusicPlaying = false;
+        musicIcon.classList.remove("spinning");
+        musicText.innerText = "Duraklatıldı";
+    } else { // Çalmıyorsa
+        ytPlayer.playVideo();
+        isMusicPlaying = true;
+        musicIcon.classList.add("spinning");
+        musicText.innerText = "Çalıyor";
+    }
+}
+
+// Butona Tıklama Kontrolü
+musicBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); 
+    toggleMusic();
+});
+
+// --- KALP & ZAMBAK PATLAMASI VE OTOMATİK MÜZİK EFEKTİ ---
 document.addEventListener("click",(e)=>{
 
-for(let i=0;i<10;i++){
+// İlk Tıklamada Müziği Gizlice Başlatıyoruz (Tarayıcı Engelini Aşmak İçin)
+if (!isMusicPlaying && ytPlayer && typeof ytPlayer.playVideo === 'function') {
+    let state = ytPlayer.getPlayerState();
+    if (state !== 1) {
+        toggleMusic();
+    }
+}
 
+for(let i=0;i<10;i++){
 const heart=document.createElement("div");
 
-// Rastgele sembol seçimi
 const symbols = ["💙", "🪷", "✨", "🤍", "💮"];
 heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
 
 heart.classList.add("floating-heart");
 
-// Tıklanan yere göre mobilde de düzgün çalışması için clientX/Y kullanıyoruz
 heart.style.left=e.clientX+"px";
 heart.style.top=e.clientY+"px";
 
@@ -536,13 +655,12 @@ document.body.appendChild(heart);
 setTimeout(()=>{
 heart.remove();
 },3000);
-
 }
 
 });
 
 // --- CANLI ZAMAN SAYAÇ SCRIPT'İ ---
-const targetDate = new Date("2026-04-13T00:00:00").getTime();
+const targetDate = new Date("2026-04-13T19:58:00").getTime();
 
 function updateCounter() {
 const now = new Date().getTime();
