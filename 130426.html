@@ -30,6 +30,7 @@
         }
 
         .hero {
+            position: relative;
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -40,24 +41,101 @@
         }
 
         .title {
-            font-size: 5rem;
-            font-weight: bold;
-            background: linear-gradient(90deg, #60a5fa, #93c5fd, #dbeafe);
+            font-size: 6.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #60a5fa, #93c5fd, #e0e7ff, #3b82f6);
+            background-size: 300% 300%;
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px #3b82f6;
+            text-shadow: 0 0 50px rgba(59, 130, 246, 0.5);
+            animation: gradientMove 6s ease infinite, floatTitle 4s ease-in-out infinite;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes floatTitle {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
         }
 
         .typing {
-            margin-top: 20px;
-            font-size: 1.4rem;
-            color: #bfdbfe;
+            margin-top: 30px;
+            font-size: 1.5rem;
+            color: #dbeafe;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px 30px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             border-right: 2px solid white;
             white-space: nowrap;
             overflow: hidden;
             width: 0;
-            animation: typing 6s steps(60, end) forwards,
-                blink .8s infinite;
+            animation: typing 5s steps(50, end) forwards, blink .8s 7, hideCursor 0.1s 5.6s forwards;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #93c5fd;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            animation: bounce 2s infinite;
+            opacity: 0.8;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .scroll-indicator span {
+            margin-top: 5px;
+            font-size: 1.5rem;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
         }
 
         @keyframes typing {
@@ -72,6 +150,12 @@
 
         @keyframes blink {
             50% {
+                border-color: transparent;
+            }
+        }
+
+        @keyframes hideCursor {
+            to {
                 border-color: transparent;
             }
         }
@@ -164,6 +248,22 @@
             align-items: center;
             margin: 40px 0 20px 0;
             height: 120px;
+            position: relative;
+        }
+
+        .lily-glow {
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 60%);
+            border-radius: 50%;
+            animation: pulseGlowLily 4s infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes pulseGlowLily {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 1; }
         }
 
         .lily {
@@ -172,6 +272,7 @@
             height: 70px;
             animation: floatLily 3s ease-in-out infinite;
             cursor: pointer;
+            z-index: 1;
         }
 
         .petal {
@@ -180,69 +281,69 @@
             left: 0;
             width: 70px;
             height: 70px;
-            background: linear-gradient(135deg, #ffffff, #bfdbfe);
+            background: linear-gradient(135deg, #60a5fa, #2563eb);
             border-radius: 0 60% 0 60%;
             transform-origin: 0 100%;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
             transition: transform 0.5s ease, box-shadow 0.5s ease;
         }
 
         .petal:nth-child(1) {
-            transform: rotate(45deg) scale(1);
-            background: linear-gradient(135deg, #ffffff, #93c5fd);
+            transform: rotate(-45deg) scale(1);
+            background: linear-gradient(135deg, #93c5fd, #1d4ed8);
             z-index: 3;
         }
 
         .petal:nth-child(2) {
-            transform: rotate(20deg) scale(0.9);
+            transform: rotate(-70deg) scale(0.9);
             z-index: 2;
         }
 
         .petal:nth-child(3) {
-            transform: rotate(70deg) scale(0.9);
+            transform: rotate(-20deg) scale(0.9);
             z-index: 2;
         }
 
         .petal:nth-child(4) {
-            transform: rotate(-5deg) scale(0.7);
+            transform: rotate(-95deg) scale(0.7);
             z-index: 1;
         }
 
         .petal:nth-child(5) {
-            transform: rotate(95deg) scale(0.7);
+            transform: rotate(5deg) scale(0.7);
             z-index: 1;
         }
 
         .lily:hover .petal:nth-child(1) {
-            transform: rotate(45deg) scale(1.05);
-            box-shadow: 0 0 25px rgba(147, 197, 253, 0.8);
+            transform: rotate(-45deg) scale(1.05);
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.8);
         }
 
         .lily:hover .petal:nth-child(2) {
-            transform: rotate(10deg) scale(0.95);
+            transform: rotate(-80deg) scale(0.95);
         }
 
         .lily:hover .petal:nth-child(3) {
-            transform: rotate(80deg) scale(0.95);
+            transform: rotate(-10deg) scale(0.95);
         }
 
         .lily:hover .petal:nth-child(4) {
-            transform: rotate(-15deg) scale(0.75);
+            transform: rotate(-105deg) scale(0.75);
         }
 
         .lily:hover .petal:nth-child(5) {
-            transform: rotate(105deg) scale(0.75);
+            transform: rotate(15deg) scale(0.75);
         }
 
         @keyframes floatLily {
 
             0%,
             100% {
-                transform: translateY(0) scale(1);
+                transform: translateY(0) scale(1) rotate(180deg);
             }
 
             50% {
-                transform: translateY(-15px) scale(1.05);
+                transform: translateY(-15px) scale(1.05) rotate(180deg);
                 filter: drop-shadow(0 0 25px #dbeafe);
             }
         }
@@ -257,8 +358,12 @@
 
         .love-fill {
             height: 100%;
-            width: 100%;
+            width: 0%;
+            /* Başlangıçta boş */
             background: linear-gradient(90deg, #2563eb, #60a5fa, #bfdbfe);
+        }
+
+        .love-fill.animate {
             animation: loading 4s ease forwards;
         }
 
@@ -305,37 +410,65 @@
             }
         }
 
-        /* --- MÜZİK BUTONU TASARIMI --- */
-        .music-btn {
+        /* --- 🌟 MÜZİK PLAYER TASARIMI 🌟 --- */
+        .music-player {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 12px 20px;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            padding: 10px 20px 10px 15px;
             border-radius: 50px;
-            color: #93c5fd;
-            font-size: 0.9rem;
-            font-weight: bold;
+            color: #dbeafe;
             cursor: pointer;
             z-index: 1000;
             display: flex;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
-            transition: 0.3s;
+            gap: 15px;
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.25);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
         }
 
-        .music-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(1.05);
-            border-color: rgba(96, 165, 250, 0.4);
+        .music-player:hover {
+            transform: scale(1.05) translateY(-5px);
+            border-color: rgba(96, 165, 250, 0.6);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
         }
 
-        .music-icon {
-            display: inline-block;
-            font-size: 1.2rem;
+        .music-player.playing {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5), inset 0 0 20px rgba(59, 130, 246, 0.2);
+            border-color: rgba(96, 165, 250, 0.5);
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+            }
+
+            100% {
+                box-shadow: 0 0 45px rgba(59, 130, 246, 0.85);
+            }
+        }
+
+        .disc-wrapper {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            border: 2px solid #3b82f6;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .disc {
+            font-size: 1.3rem;
+            line-height: 1;
         }
 
         .spinning {
@@ -345,6 +478,82 @@
         @keyframes spinMusic {
             100% {
                 transform: rotate(360deg);
+            }
+        }
+
+        .music-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .music-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #bfdbfe;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+        }
+
+        .music-status {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 2px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .equalizer {
+            display: flex;
+            gap: 3px;
+            height: 18px;
+            align-items: flex-end;
+            margin-left: 5px;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+        }
+
+        .music-player.playing .equalizer {
+            opacity: 1;
+        }
+
+        .equalizer span {
+            width: 4px;
+            background: #60a5fa;
+            border-radius: 2px;
+            height: 4px;
+            transition: height 0.3s ease;
+        }
+
+        .music-player.playing .equalizer span {
+            animation: eqBounce 1.2s infinite ease-in-out;
+        }
+
+        .music-player.playing .equalizer span:nth-child(1) {
+            animation-delay: 0.1s;
+            height: 12px;
+        }
+
+        .music-player.playing .equalizer span:nth-child(2) {
+            animation-delay: 0.3s;
+            height: 18px;
+        }
+
+        .music-player.playing .equalizer span:nth-child(3) {
+            animation-delay: 0.2s;
+            height: 10px;
+        }
+
+        @keyframes eqBounce {
+
+            0%,
+            100% {
+                transform: scaleY(0.6);
+            }
+
+            50% {
+                transform: scaleY(1.1);
             }
         }
 
@@ -672,10 +881,22 @@
                 margin-bottom: 50px;
             }
 
-            .music-btn {
+            .music-player {
                 bottom: 15px;
                 right: 15px;
-                padding: 10px 15px;
+                padding: 8px 15px 8px 10px;
+            }
+
+            .disc-wrapper {
+                width: 30px;
+                height: 30px;
+            }
+
+            .disc {
+                font-size: 1rem;
+            }
+
+            .music-title {
                 font-size: 0.8rem;
             }
 
@@ -694,6 +915,256 @@
             .letter-board {
                 max-height: 400px;
             }
+        }
+
+        /* --- 🌟 RASTGELE SEVGİ SÖZLERİ (POPUP) TASARIMI 🌟 --- */
+        .love-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(96, 165, 250, 0.4);
+            padding: 18px 25px;
+            border-radius: 20px;
+            color: #f8fafc;
+            font-size: 1.05rem;
+            box-shadow: 0 10px 40px rgba(59, 130, 246, 0.25);
+            z-index: 9999;
+            pointer-events: none;
+            /* Tıklanmaz! */
+            transform: translateY(150px);
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            max-width: 400px;
+            line-height: 1.5;
+        }
+
+        .love-toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .love-toast {
+                bottom: 85px;
+                /* Mobilde müzik butonunun üstünde durması için */
+                left: 20px;
+                right: 20px;
+                font-size: 0.95rem;
+                max-width: calc(100vw - 40px);
+            }
+        }
+
+        /* --- AŞK KUPONLARI --- */
+        .coupons-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .scratch-card {
+            width: 250px;
+            height: 120px;
+            position: relative;
+            margin-bottom: 10px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            overflow: hidden;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .scratch-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffffff, #dbeafe);
+            color: #1e3a8a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.95rem;
+            padding: 15px;
+            text-align: center;
+            border: 2px dashed #60a5fa;
+            border-radius: 15px;
+            z-index: 1;
+            box-sizing: border-box;
+        }
+
+        .scratch-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            cursor: crosshair;
+            border-radius: 15px;
+        }
+
+        .winner-popup {
+            position: fixed !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) scale(1.5) !important;
+            z-index: 99999 !important;
+            box-shadow: 0 0 50px rgba(59, 130, 246, 0.8) !important;
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+        }
+
+
+
+        /* --- FLIP CARDS --- */
+        .flip-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .flip-card {
+            width: 250px;
+            height: 250px;
+            perspective: 1000px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-front, .flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .flip-front {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #93c5fd;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .flip-back {
+            background: rgba(59, 130, 246, 0.15);
+            backdrop-filter: blur(15px);
+            transform: rotateY(180deg);
+            font-size: 1.1rem;
+            color: #dbeafe;
+            line-height: 1.6;
+        }
+
+        /* --- AŞK KAVANOZU --- */
+        .jar-container {
+            position: relative;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin-top: 30px;
+        }
+
+        .jar {
+            position: relative;
+            width: 120px;
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .jar-lid {
+            width: 90px;
+            height: 20px;
+            background: #cbd5e1;
+            border-radius: 5px 5px 0 0;
+            border-bottom: 2px solid #94a3b8;
+            z-index: 2;
+            box-shadow: inset 0 2px 5px rgba(255,255,255,0.8);
+        }
+
+        .jar-glass {
+            width: 120px;
+            height: 140px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: none;
+            border-radius: 0 0 30px 30px;
+            backdrop-filter: blur(3px);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 15px;
+            box-shadow: inset 0 -10px 20px rgba(255,255,255,0.1), 0 10px 30px rgba(59, 130, 246, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .jar-notes {
+            font-size: 2.5rem;
+            letter-spacing: -10px;
+            animation: floatLily 4s ease-in-out infinite;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));
+        }
+
+        .flying-note {
+            position: absolute;
+            width: 280px;
+            background: #f8fafc;
+            color: #1e3a8a;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            opacity: 0;
+            transform: translateY(50px) scale(0.5);
+            pointer-events: none;
+            z-index: 10;
+            text-align: center;
+            line-height: 1.5;
+            border: 2px solid #93c5fd;
+        }
+
+        .flying-note.show {
+            animation: flyOut 5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes flyOut {
+            0% { opacity: 0; transform: translateY(20px) scale(0.2); }
+            10% { opacity: 1; transform: translateY(-130px) scale(1); }
+            85% { opacity: 1; transform: translateY(-130px) scale(1); }
+            100% { opacity: 0; transform: translateY(-180px) scale(0.8); }
         }
     </style>
 </head>
@@ -716,8 +1187,17 @@
         Tarayıcınız ses oynatmayı desteklemiyor.
     </audio>
 
-    <div class="music-btn" id="musicBtn">
-        <span class="music-icon" id="musicIcon">🎵</span> <span id="musicText">Ses Kapalı</span>
+    <div class="music-player" id="musicBtn">
+        <div class="disc-wrapper">
+            <div class="disc" id="musicIcon">💿</div>
+        </div>
+        <div class="music-info">
+            <span class="music-title">Bizim Şarkımız</span>
+            <span class="music-status" id="musicText">Müziği Başlat</span>
+        </div>
+        <div class="equalizer" id="equalizer">
+            <span></span><span></span><span></span>
+        </div>
     </div>
 
     <section class="hero">
@@ -730,6 +1210,11 @@
 
         <div class="heart">
             💙
+        </div>
+
+        <div class="scroll-indicator" onclick="window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })">
+            Aşağı Kaydır
+            <span>↓</span>
         </div>
 
     </section>
@@ -752,7 +1237,9 @@
                 </div>
             </div>
             <p style="margin-top:30px; font-size:1.1rem; color:#bfdbfe; font-style: italic;">
-                13 Nisan 2026 saat 19:58'den beri ömrümün en güzel saniyelerini yaşıyorum... 💙
+                13 Nisan 2026 saat 19:58'den beri ömrümün en güzel saniyelerini yaşıyorum... 💙<br><br>
+                Zaman seninleyken bazen su gibi akıp geçiyor, bazen de gözlerine daldığım o anlarda tamamen duruyor.
+                Birlikte geçirdiğimiz her bir saniye, hayatıma kattığın renklerin en güzel kanıtı.
             </p>
         </div>
     </section>
@@ -786,6 +1273,7 @@
                 sonsuza kadar solmayacak bir zambak daha kodladım.
             </p>
             <div class="lily-container">
+                <div class="lily-glow"></div>
                 <div class="lily">
                     <div class="petal"></div>
                     <div class="petal"></div>
@@ -794,6 +1282,10 @@
                     <div class="petal"></div>
                 </div>
             </div>
+            <p style="margin-top: 25px; font-size: 1.05rem; color: #93c5fd; font-style: italic; line-height: 1.8;">
+                Bu mavi zambak, tıpkı sana olan sevgim gibi asla solmayacak... <br>
+                Zamana, mesafelere ve bu dijital dünyanın hızına inat her sayfayı açtığında senin için yeniden çiçek açacak. 💙
+            </p>
         </div>
     </section>
 
@@ -813,9 +1305,112 @@
                 koca dünyada başka hiçbir şeye değişmem.<br><br>
 
                 Sen benim için sadece "biri" değilsin...<br>
-                Sen, bu hayatın bana verdiği en güzel hediyesin.
+                Sen, bu hayatın bana verdiği en güzel hediyesin.<br><br>
+
+                Ve her sabah uyandığımda, seni seçtiğim için değil; kalbim başka hiçbir seçeneği kabul bile etmediği
+                için bir kez daha şükrediyorum. Benim en büyük şansım, kalbimin yegane pusulası sensin.
             </p>
 
+        </div>
+    </section>
+
+    <!-- YENİ BÖLÜM 1: AŞK KUPONLARI -->
+    <section class="section">
+        <div class="glass">
+            <h2>Aşk Kuponları 🎫</h2>
+            <p>Rastgele birini seç ve sana çıkan hediyeyi görmek için üzerine tıkla...</p>
+            <div class="coupons-grid" id="scratchContainer">
+                <div class="scratch-card">
+                    <div class="scratch-content">1 Adet Sımsıkı Sarılma Hakkı 🤗</div>
+                    <canvas class="scratch-canvas"></canvas>
+                </div>
+                <div class="scratch-card">
+                    <div class="scratch-content">İstediğin Bir Yemeği Ismarlama Kuponu 🍕</div>
+                    <canvas class="scratch-canvas"></canvas>
+                </div>
+                <div class="scratch-card">
+                    <div class="scratch-content">Haklı Da Olsan Anında Barışma Kuponu 🕊️</div>
+                    <canvas class="scratch-canvas"></canvas>
+                </div>
+                <div class="scratch-card">
+                    <div class="scratch-content">Birlikte Film Seçme & İzleme Gecesi 🎬</div>
+                    <canvas class="scratch-canvas"></canvas>
+                </div>
+                <div class="scratch-card">
+                    <div class="scratch-content">Günün Yorgunluğu İçin 15 Dk Masaj 💆‍♀️</div>
+                    <canvas class="scratch-canvas"></canvas>
+                </div>
+                <div class="scratch-card">
+                    <div class="scratch-content">Sınırsız Şımartılma ve İlgi Günü ✨</div>
+                    <canvas class="scratch-canvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- YENİ BÖLÜM 2: KART OYUNU -->
+    <section class="section">
+        <div class="glass">
+            <h2>Seni Seviyorum Çünkü... 🃏</h2>
+            <p>Nedenini görmek için kartların üzerine tıkla.</p>
+            <div class="flip-grid">
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-inner">
+                        <div class="flip-front">Gülüşün ✨</div>
+                        <div class="flip-back">Yüzündeki o minik tebessüm, benim dünyamdaki en karanlık bulutları bile dağıtmaya yetiyor.</div>
+                    </div>
+                </div>
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-inner">
+                        <div class="flip-front">Bana Bakışın 👀</div>
+                        <div class="flip-back">Bana öyle bir bakıyorsun ki, kendimi dünyanın en şanslı, en özel insanı gibi hissediyorum.</div>
+                    </div>
+                </div>
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-inner">
+                        <div class="flip-front">Şefkatin 🤍</div>
+                        <div class="flip-back">İçindeki o saf merhamet ve sonsuz şefkat, beni her geçen gün sana biraz daha aşık ediyor.</div>
+                    </div>
+                </div>
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-inner">
+                        <div class="flip-front">Sesin 🎶</div>
+                        <div class="flip-back">Ne zaman moralim bozulsa, sesini duymak tüm dünyayı susturup kalbimi huzurla dolduruyor.</div>
+                    </div>
+                </div>
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-inner">
+                        <div class="flip-front">Kokun 🌸</div>
+                        <div class="flip-back">Bana sarıldığında duyduğum o koku, kendimi en güvende hissettiğim evimin ta kendisi.</div>
+                    </div>
+                </div>
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-inner">
+                        <div class="flip-front">İnancın 🌟</div>
+                        <div class="flip-back">Benim bile kendime inanmadığım anlarda ellerimden tutup beni ayağa kaldırman...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- YENİ BÖLÜM 3: AŞK KAVANOZU -->
+    <section class="section">
+        <div class="glass">
+            <h2>Sevgimin Kavanozu 🫙</h2>
+            <p>Aşağıdaki butona bas ve içinden senin için rastgele bir not çek...</p>
+            
+            <div class="jar-container">
+                <div class="jar">
+                    <div class="jar-lid"></div>
+                    <div class="jar-glass">
+                        <div class="jar-notes">💌💌</div>
+                    </div>
+                </div>
+                <div class="flying-note" id="flyingNote">Burası Not Alanı</div>
+            </div>
+            
+            <button class="send-btn" style="margin-top:20px; width:auto; padding: 15px 30px;" onclick="drawJarNote(event)">İçinden Bir Not Çek 🥠</button>
         </div>
     </section>
 
@@ -838,7 +1433,10 @@
                 ama kalbimdeki yerinin uçsuz bucaksızliğini anlatacak hiçbir ölçü birimi yok.<br><br>
 
                 Sonsuzluk dedikleri şey, gözlerine baktığım o tek bir anın yanında<br>
-                sadece sıradan bir kelime kalır.
+                sadece sıradan bir kelime kalır.<br><br>
+
+                Bana dünyadaki en büyük servetin ne olduğunu sorsalar, hiç düşünmeden gülüşünü gösterirdim. Çünkü senin
+                bir gülüşün, benim içimdeki bütün karanlıkları aydınlatmaya, bütün kışları bahara çevirmeye yetiyor.
             </p>
 
         </div>
@@ -855,7 +1453,11 @@
                 yine de eksik kalırdı.<br><br>
 
                 Çünkü bazı hisler anlatılmaz,<br>
-                sadece yaşanır.<br>
+                sadece yaşanır.<br><br>
+
+                İşte o yaşanacak en güzel his, senin ellerini tuttuğumda hissettiğim o koca evren. Herkesin dünyada
+                beklediği bir mucize vardır derler... Sen benim başıma gelen en güzel, en inandığım tek
+                mucizesin.<br><br>
                 💙
             </p>
 
@@ -866,6 +1468,7 @@
         yavrummmmmmmmmmmmmmmmmmm için tasarlandı 💙
     </div>
 
+    <script src="sozler.js"></script>
     <script>
 
         const canvas = document.getElementById("stars");
@@ -938,12 +1541,14 @@
             if (bgMusic.paused) {
                 bgMusic.play().then(() => {
                     isMusicPlaying = true;
+                    musicBtn.classList.add("playing");
                     musicIcon.classList.add("spinning");
                     musicText.innerText = "Çalıyor";
                 }).catch((err) => console.log("Mobil Autoplay engellendi, etkileşim bekleniyor.", err));
             } else {
                 bgMusic.pause();
                 isMusicPlaying = false;
+                musicBtn.classList.remove("playing");
                 musicIcon.classList.remove("spinning");
                 musicText.innerText = "Duraklatıldı";
             }
@@ -954,25 +1559,14 @@
             toggleMusic();
         });
 
-        // --- KALP & ZAMBAK PATLAMASI ---
-        document.addEventListener("click", (e) => {
-            // Butonlara ve yazı alanlarına tıklanınca müzik veya kalp efekti tetiklenmesin
-            if (e.target.tagName === "TEXTAREA" || e.target.tagName === "BUTTON" || e.target.tagName === "SELECT" || e.target.tagName === "SPAN") return;
-
-            if (!isMusicPlaying) {
-                toggleMusic();
-            }
-
-            for (let i = 0; i < 10; i++) {
+        // --- EMOJİ PATLAMA MOTORU ---
+        function createExplosion(x, y, count = 10, symbols = ["💙", "🪷", "✨", "🤍", "💮"]) {
+            for (let i = 0; i < count; i++) {
                 const heart = document.createElement("div");
-
-                const symbols = ["💙", "🪷", "✨", "🤍", "💮"];
                 heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-
                 heart.classList.add("floating-heart");
-
-                heart.style.left = e.clientX + "px";
-                heart.style.top = e.clientY + "px";
+                heart.style.left = x + "px";
+                heart.style.top = y + "px";
 
                 const angle = Math.random() * Math.PI * 2;
                 const distance = Math.random() * 150 + 50;
@@ -992,7 +1586,18 @@
                     heart.remove();
                 }, 3000);
             }
+        }
 
+        // --- TIKLAMA İLE KALP PATLAMASI ---
+        document.addEventListener("click", (e) => {
+            // Butonlara ve yazı alanlarına tıklanınca müzik veya kalp efekti tetiklenmesin
+            if (e.target.tagName === "TEXTAREA" || e.target.tagName === "BUTTON" || e.target.tagName === "SELECT" || e.target.tagName === "SPAN") return;
+
+            if (!isMusicPlaying) {
+                toggleMusic();
+            }
+
+            createExplosion(e.clientX, e.clientY, 10);
         });
 
         // --- CANLI ZAMAN SAYAÇ SCRIPT'İ ---
@@ -1247,11 +1852,248 @@
             }
         }
 
+        /* --- 🌟 RASTGELE İLTİFAT / SEVGİ SÖZÜ MOTORU 🌟 --- */
+        // Not: 'loveQuotes' dizisi artık dışarıdan (sozler.js) dosyasından otomatik yüklenmektedir.
+        // Söz eklemek veya değiştirmek için lütfen sozler.js dosyasını açın.
+
+        function showLoveToast() {
+            // Daha önce varsa sil
+            const existing = document.getElementById("loveToast");
+            if (existing) existing.remove();
+
+            const toast = document.createElement("div");
+            toast.id = "loveToast";
+            toast.className = "love-toast";
+
+            // Rastgele bir söz seç
+            const randomQuote = loveQuotes[Math.floor(Math.random() * loveQuotes.length)];
+
+            toast.innerHTML = `<span style="font-size:1.5rem; animation: pulse 1.5s infinite;">💌</span> <span>${randomQuote}</span>`;
+            document.body.appendChild(toast);
+
+            // 1 saniye sonra ekrana getir
+            setTimeout(() => {
+                toast.classList.add("show");
+            }, 1000);
+
+            // 8 saniye ekranda kalsın, sonra gitsin
+            setTimeout(() => {
+                toast.classList.remove("show");
+                // 1 saniye animasyon bitmesini bekle ve DOM'dan sil
+                setTimeout(() => toast.remove(), 1000);
+            }, 9000);
+        }
+
         // Sayfa yüklendiğinde check fonksiyonlarını ateşle
         window.addEventListener('DOMContentLoaded', () => {
             checkMonthlyAnniversary();
             initDatabase();
+            // Rastgele iltifat popup'ını başlat
+            setTimeout(showLoveToast, 500);
+
+            // Aşk barı (love-bar) ekranda göründüğünde dolmaya başlasın
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const loveFill = entry.target.querySelector('.love-fill');
+                        if (loveFill) {
+                            loveFill.classList.add('animate');
+
+                            // Animasyon bittiğinde (bar dolduğunda) patlama yap
+                            loveFill.addEventListener('animationend', () => {
+                                const rect = loveFill.getBoundingClientRect();
+                                // Barın sağ ucunda (dolduğu noktada) patlama yap
+                                const explodeX = rect.right - 20; // Hafifçe içeriden patlasın
+                                const explodeY = rect.top + rect.height / 2;
+
+                                // Özel emojilerle (Zambak, Beyaz Kalp, Mavi Kalp, Panda) 40 adetlik büyük patlama!
+                                createExplosion(explodeX, explodeY, 40, ["🪷", "🤍", "💙", "🐼"]);
+                            }, { once: true });
+
+                            // Bir kere animasyon çalıştıktan sonra gözlemeyi bırak
+                            observer.unobserve(entry.target);
+                        }
+                    }
+                });
+            }, { threshold: 0.5 }); // Barın en az yarısı ekrana girince çalışır
+
+            const loveBar = document.querySelector('.love-bar');
+            if (loveBar) {
+                observer.observe(loveBar);
+            }
         });
+
+        // --- KAZI KAZAN JS LİSTESİ ---
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementById('scratchContainer');
+            if(!container) return;
+            
+            // Kartların yerini her açılışta karıştır (Shuffle)
+            const cardsArray = Array.from(container.children);
+            for (let i = cardsArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [cardsArray[i], cardsArray[j]] = [cardsArray[j], cardsArray[i]];
+            }
+            cardsArray.forEach(card => container.appendChild(card));
+
+            let globalHasRevealedCoupon = false;
+
+            const scratchCards = document.querySelectorAll('.scratch-card');
+
+            scratchCards.forEach(card => {
+                const canvas = card.querySelector('.scratch-canvas');
+                const ctx = canvas.getContext('2d');
+                let isDrawing = false;
+                let isRevealed = false;
+                let isCurrentlyScratchingThis = false;
+
+                canvas.width = card.offsetWidth;
+                canvas.height = card.offsetHeight;
+
+                // Kaplama çizimi
+                ctx.fillStyle = '#94a3b8'; // Gri gümüş
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Kaplama yazısı
+                ctx.font = 'bold 18px sans-serif';
+                ctx.fillStyle = '#f8fafc';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('Kazımak için sürükle 🪙', canvas.width / 2, canvas.height / 2);
+
+                ctx.lineJoin = 'round';
+                ctx.lineCap = 'round';
+                ctx.lineWidth = 30; // Kazıma fırçası boyutu
+
+                function getPointerPos(e) {
+                    const rect = canvas.getBoundingClientRect();
+                    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                    return {
+                        x: clientX - rect.left,
+                        y: clientY - rect.top
+                    };
+                }
+
+                function scratch(e) {
+                    if (!isDrawing || isRevealed) return;
+                    if (globalHasRevealedCoupon && !isCurrentlyScratchingThis) return;
+                    e.preventDefault();
+
+                    const pos = getPointerPos(e);
+                    ctx.globalCompositeOperation = 'destination-out';
+                    ctx.lineTo(pos.x, pos.y);
+                    ctx.stroke();
+
+                    checkReveal();
+                }
+
+                function checkReveal() {
+                    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    let pixels = imgData.data;
+                    let transparent = 0;
+                    for (let i = 3; i < pixels.length; i += 4) {
+                        if (pixels[i] === 0) transparent++;
+                    }
+
+                    const percent = (transparent / (pixels.length / 4)) * 100;
+                    if (percent > 45 && !isRevealed) {
+                        isRevealed = true;
+                        globalHasRevealedCoupon = true;
+
+                        canvas.style.transition = "opacity 0.6s ease";
+                        canvas.style.opacity = "0";
+                        setTimeout(() => {
+                            canvas.style.display = 'none';
+                            
+                            // Ekranın ortasında büyüt
+                            document.body.classList.add('has-winner-popup');
+                            card.classList.add('winner-popup');
+
+                            // Tıklayınca kapat
+                            card.addEventListener('click', () => {
+                                document.body.classList.remove('has-winner-popup');
+                                card.classList.remove('winner-popup');
+                            }, { once: true });
+                            
+                            createExplosion(window.innerWidth / 2, window.innerHeight / 2, 30, ['🎁', '✨', '💙', '🎉', '🎊']);
+                        }, 600);
+                    }
+                }
+
+                canvas.addEventListener('mousedown', (e) => {
+                    if (globalHasRevealedCoupon && !isRevealed) {
+                        alert("Her ziyarette sadece 1 kupon açabilirsin! Yarın tekrar gel 💙");
+                        return;
+                    }
+                    isDrawing = true;
+                    isCurrentlyScratchingThis = true;
+                    const pos = getPointerPos(e);
+                    ctx.beginPath();
+                    ctx.moveTo(pos.x, pos.y);
+                });
+                canvas.addEventListener('mousemove', scratch);
+                canvas.addEventListener('mouseup', () => { isDrawing = false; });
+                canvas.addEventListener('mouseleave', () => { isDrawing = false; });
+
+                canvas.addEventListener('touchstart', (e) => {
+                    if (globalHasRevealedCoupon && !isRevealed) {
+                        alert("Her ziyarette sadece 1 kupon açabilirsin! Yarın tekrar gel 💙");
+                        return;
+                    }
+                    isDrawing = true;
+                    isCurrentlyScratchingThis = true;
+                    const pos = getPointerPos(e);
+                    ctx.beginPath();
+                    ctx.moveTo(pos.x, pos.y);
+                }, {passive: false});
+                canvas.addEventListener('touchmove', scratch, {passive: false});
+                canvas.addEventListener('touchend', () => { isDrawing = false; });
+            });
+        });
+
+        // --- AŞK KAVANOZU JS LİSTESİ ---
+        const jarNotes = [
+            "Gülüşün tüm dertlerimi unutturuyor.",
+            "Bana her sarıldığında evimde hissediyorum.",
+            "Gözlerindeki o sıcaklık içimi eritiyor.",
+            "Dünyanın en şanslı insanı benim çünkü sen varsın.",
+            "Seninle geçen her saniye, ömrüme ömür katıyor.",
+            "Sadece sesini duymak bile günümü aydınlatıyor.",
+            "Seninle susmak bile o kadar güzel ki...",
+            "İyi ki doğdun, iyi ki beni buldun.",
+            "Kokun, dünyanın en huzur veren şeyi.",
+            "Birlikte kurduğumuz hayallerin hepsini yaşayacağız.",
+            "Sen benim en güzel duamın en güzel cevabısın.",
+            "Ellerini tuttuğumda zaman duruyor.",
+            "Beni olduğum gibi sevmen en büyük zenginliğim.",
+            "Sabah uyandığımda aklıma gelen ilk şeysin.",
+            "Gece uyumadan önce aklıma gelen son şeysin."
+        ];
+
+        function drawJarNote(e) {
+            const noteEl = document.getElementById('flyingNote');
+            
+            // Eğer zaten animasyondaysa bekle
+            if(noteEl.classList.contains('show')) return;
+
+            const randomNote = jarNotes[Math.floor(Math.random() * jarNotes.length)];
+            noteEl.innerText = randomNote;
+            
+            noteEl.classList.add('show');
+            
+            // Konfeti / Kalp patlat
+            if(e) {
+                createExplosion(e.clientX, e.clientY, 20, ["💌", "✨", "🤍", "🫙"]);
+            } else {
+                createExplosion(window.innerWidth / 2, window.innerHeight / 2, 20, ["💌", "✨", "🤍"]);
+            }
+            
+            // Animasyon bitince class'ı temizle
+            setTimeout(() => {
+                noteEl.classList.remove('show');
+            }, 5000); // 5s flyOut animation
+        }
 
     </script>
 
