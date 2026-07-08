@@ -1991,7 +1991,8 @@
             }
             cardsArray.forEach(card => container.appendChild(card));
 
-            let globalHasRevealedCoupon = false;
+            const todayStr = new Date().toDateString();
+            let globalHasRevealedCoupon = localStorage.getItem('lastScratchedDate') === todayStr;
 
             const scratchCards = document.querySelectorAll('.scratch-card');
 
@@ -2055,6 +2056,7 @@
                     if (percent > 45 && !isRevealed) {
                         isRevealed = true;
                         globalHasRevealedCoupon = true;
+                        localStorage.setItem('lastScratchedDate', new Date().toDateString());
 
                         canvas.style.transition = "opacity 0.6s ease";
                         canvas.style.opacity = "0";
@@ -2078,7 +2080,7 @@
 
                 canvas.addEventListener('mousedown', (e) => {
                     if (globalHasRevealedCoupon && !isRevealed) {
-                        alert("Her ziyarette sadece 1 kupon açabilirsin! Yarın tekrar gel 💙");
+                        alert("Günde sadece 1 kupon açabilirsin! Yarın gece 12'den sonra tekrar gel 💙");
                         return;
                     }
                     isDrawing = true;
@@ -2093,7 +2095,7 @@
 
                 canvas.addEventListener('touchstart', (e) => {
                     if (globalHasRevealedCoupon && !isRevealed) {
-                        alert("Her ziyarette sadece 1 kupon açabilirsin! Yarın tekrar gel 💙");
+                        alert("Günde sadece 1 kupon açabilirsin! Yarın gece 12'den sonra tekrar gel 💙");
                         return;
                     }
                     isDrawing = true;
@@ -2123,7 +2125,31 @@
             "Ellerini tuttuğumda zaman duruyor.",
             "Beni olduğum gibi sevmen en büyük zenginliğim.",
             "Sabah uyandığımda aklıma gelen ilk şeysin.",
-            "Gece uyumadan önce aklıma gelen son şeysin."
+            "Gece uyumadan önce aklıma gelen son şeysin.",
+            "Aramızdaki kilometreler, sana olan sevgimin yanında bir hiç kalıyor.",
+            "Mesafeler sadece bedenleri ayırır, kalplerimiz hep bir.",
+            "Ekranda yüzünü gördüğüm an tüm günün yorgunluğu gidiyor.",
+            "Sana dokunamadığım her an, seni daha çok özlüyor ve seviyorum.",
+            "Bir sonraki sarılmamız, beklediğimiz her saniyeye değecek.",
+            "Uzakta olsan da kalbimin tam ortasındasın.",
+            "Seninle aynı gökyüzüne baktığımızı bilmek bile içimi ısıtıyor.",
+            "Mesajının gelmesiyle yüzümde oluşan o aptal gülümsemeyi çok seviyorum.",
+            "Birlikte olacağımız o güzel günler için sabırsızlanıyorum.",
+            "Sesini duymak, bana kilometrelerce öteden sarılman gibi.",
+            "Hayatımın en güzel tesadüfüsün.",
+            "Zaman seninleyken su gibi akıp geçiyor.",
+            "Seninle gülmek dünyadaki en güzel his.",
+            "Ne olursa olsun ellerimi hiç bırakma.",
+            "Seni sevmek nefes almak kadar doğal, su içmek kadar ihtiyaç benim için.",
+            "Gözümü kapattığımda hayal ettiğim tek yer senin yanın.",
+            "Aşkın, ruhuma şifa gibi geliyor.",
+            "Seni her gün bir öncekinden daha çok seviyorum.",
+            "İçimdeki çocuğun en yakın arkadaşısın.",
+            "Sen varsan, her şey daha güzel, daha anlamlı.",
+            "Kavuşacağımız günün hayaliyle yaşıyorum.",
+            "İyi ki aynı çağda, aynı gökyüzü altında birbirimizi bulduk.",
+            "Seninle geçen her an, kalbime kazınan bir anı.",
+            "Sen benim en güzel iyikimsin."
         ];
 
         function drawJarNote(e) {
