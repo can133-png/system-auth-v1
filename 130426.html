@@ -262,8 +262,15 @@
         }
 
         @keyframes pulseGlowLily {
-            0% { transform: scale(0.8); opacity: 0.5; }
-            100% { transform: scale(1.2); opacity: 1; }
+            0% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
         }
 
         .lily {
@@ -974,7 +981,7 @@
             position: relative;
             margin-bottom: 10px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             overflow: hidden;
             user-select: none;
             cursor: pointer;
@@ -1052,7 +1059,8 @@
             transform: rotateY(180deg);
         }
 
-        .flip-front, .flip-back {
+        .flip-front,
+        .flip-back {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -1062,8 +1070,8 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .flip-front {
@@ -1072,7 +1080,7 @@
             font-size: 1.5rem;
             font-weight: bold;
             color: #93c5fd;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .flip-back {
@@ -1110,7 +1118,7 @@
             border-radius: 5px 5px 0 0;
             border-bottom: 2px solid #94a3b8;
             z-index: 2;
-            box-shadow: inset 0 2px 5px rgba(255,255,255,0.8);
+            box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.8);
         }
 
         .jar-glass {
@@ -1125,7 +1133,7 @@
             align-items: flex-end;
             justify-content: center;
             padding-bottom: 15px;
-            box-shadow: inset 0 -10px 20px rgba(255,255,255,0.1), 0 10px 30px rgba(59, 130, 246, 0.2);
+            box-shadow: inset 0 -10px 20px rgba(255, 255, 255, 0.1), 0 10px 30px rgba(59, 130, 246, 0.2);
             position: relative;
             overflow: hidden;
         }
@@ -1134,7 +1142,7 @@
             font-size: 2.5rem;
             letter-spacing: -10px;
             animation: floatLily 4s ease-in-out infinite;
-            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));
+            filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.3));
         }
 
         .flying-note {
@@ -1146,7 +1154,7 @@
             border-radius: 10px;
             font-size: 1.1rem;
             font-weight: bold;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
             opacity: 0;
             transform: translateY(50px) scale(0.5);
             pointer-events: none;
@@ -1161,10 +1169,25 @@
         }
 
         @keyframes flyOut {
-            0% { opacity: 0; transform: translateY(20px) scale(0.2); }
-            10% { opacity: 1; transform: translateY(-130px) scale(1); }
-            85% { opacity: 1; transform: translateY(-130px) scale(1); }
-            100% { opacity: 0; transform: translateY(-180px) scale(0.8); }
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.2);
+            }
+
+            10% {
+                opacity: 1;
+                transform: translateY(-130px) scale(1);
+            }
+
+            85% {
+                opacity: 1;
+                transform: translateY(-130px) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-180px) scale(0.8);
+            }
         }
     </style>
 </head>
@@ -1284,7 +1307,8 @@
             </div>
             <p style="margin-top: 25px; font-size: 1.05rem; color: #93c5fd; font-style: italic; line-height: 1.8;">
                 Bu mavi zambak, tıpkı sana olan sevgim gibi asla solmayacak... <br>
-                Zamana, mesafelere ve bu dijital dünyanın hızına inat her sayfayı açtığında senin için yeniden çiçek açacak. 💙
+                Zamana, mesafelere ve bu dijital dünyanın hızına inat her sayfayı açtığında senin için yeniden çiçek
+                açacak. 💙
             </p>
         </div>
     </section>
@@ -1321,27 +1345,51 @@
             <p>Rastgele birini seç ve sana çıkan hediyeyi görmek için üzerine tıkla...</p>
             <div class="coupons-grid" id="scratchContainer">
                 <div class="scratch-card">
-                    <div class="scratch-content">1 Adet Sımsıkı Sarılma Hakkı 🤗</div>
+                    <div class="scratch-content">Buluştuğumuzda İlk Gördüğüm Yerde Sımsıkı Sarılma 🤗</div>
                     <canvas class="scratch-canvas"></canvas>
                 </div>
                 <div class="scratch-card">
-                    <div class="scratch-content">İstediğin Bir Yemeği Ismarlama Kuponu 🍕</div>
+                    <div class="scratch-content">Evine/Bulunduğun Yere Sürpriz Yemek Siparişi 🍕</div>
                     <canvas class="scratch-canvas"></canvas>
                 </div>
                 <div class="scratch-card">
-                    <div class="scratch-content">Haklı Da Olsan Anında Barışma Kuponu 🕊️</div>
+                    <div class="scratch-content">Trip Atmadan Anında Barışma (Uzakta Küs Kalınmaz!) 🕊️</div>
                     <canvas class="scratch-canvas"></canvas>
                 </div>
                 <div class="scratch-card">
-                    <div class="scratch-content">Birlikte Film Seçme & İzleme Gecesi 🎬</div>
+                    <div class="scratch-content">Teleparty/Discord Üzerinden Ortak Film Gecesi 🎬</div>
                     <canvas class="scratch-canvas"></canvas>
                 </div>
                 <div class="scratch-card">
-                    <div class="scratch-content">Günün Yorgunluğu İçin 15 Dk Masaj 💆‍♀️</div>
+                    <div class="scratch-content">Tüm Gece Kameralar Açık Beraber Uyuma 😴</div>
                     <canvas class="scratch-canvas"></canvas>
                 </div>
                 <div class="scratch-card">
-                    <div class="scratch-content">Sınırsız Şımartılma ve İlgi Günü ✨</div>
+                    <div class="scratch-content">Tüm Gün Kesintisiz Mesajlaşma/Arama Garantisi ✨</div>
+                    <canvas class="scratch-canvas"></canvas>
+                </div>
+                <div class="scratch-card">
+                    <div class="scratch-content">Kameralar Açık Karşılıklı Kahve/Tatlı Randevusu ☕</div>
+                    <canvas class="scratch-canvas"></canvas>
+                </div>
+                <div class="scratch-card">
+                    <div class="scratch-content">Bugün Oynanacak Oyunu/Filmi Senin Seçme Hakkın 👑</div>
+                    <canvas class="scratch-canvas"></canvas>
+                </div>
+                <div class="scratch-card">
+                    <div class="scratch-content">Telefonda 15 Dk Boyunca Sadece Seni Övme Seansı 🗣️</div>
+                    <canvas class="scratch-canvas"></canvas>
+                </div>
+                <div class="scratch-card">
+                    <div class="scratch-content">Günün İstediğin Bir Saatinde Sürpriz Ses Kaydı 🎵</div>
+                    <canvas class="scratch-canvas"></canvas>
+                </div>
+                <div class="scratch-card">
+                    <div class="scratch-content">Bana İstediğin Şarkıyı Söyletme/Dinletme Hakkı 🎶</div>
+                    <canvas class="scratch-canvas"></canvas>
+                </div>
+                <div class="scratch-card">
+                    <div class="scratch-content">Kameralı Görüşmede Bol Bol Uçan Öpücük 😘</div>
                     <canvas class="scratch-canvas"></canvas>
                 </div>
             </div>
@@ -1357,37 +1405,43 @@
                 <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="flip-inner">
                         <div class="flip-front">Gülüşün ✨</div>
-                        <div class="flip-back">Yüzündeki o minik tebessüm, benim dünyamdaki en karanlık bulutları bile dağıtmaya yetiyor.</div>
+                        <div class="flip-back">Yüzündeki o minik tebessüm, benim dünyamdaki en karanlık bulutları bile
+                            dağıtmaya yetiyor.</div>
                     </div>
                 </div>
                 <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="flip-inner">
                         <div class="flip-front">Bana Bakışın 👀</div>
-                        <div class="flip-back">Bana öyle bir bakıyorsun ki, kendimi dünyanın en şanslı, en özel insanı gibi hissediyorum.</div>
+                        <div class="flip-back">Bana öyle bir bakıyorsun ki, kendimi dünyanın en şanslı, en özel insanı
+                            gibi hissediyorum.</div>
                     </div>
                 </div>
                 <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="flip-inner">
                         <div class="flip-front">Şefkatin 🤍</div>
-                        <div class="flip-back">İçindeki o saf merhamet ve sonsuz şefkat, beni her geçen gün sana biraz daha aşık ediyor.</div>
+                        <div class="flip-back">İçindeki o saf merhamet ve sonsuz şefkat, beni her geçen gün sana biraz
+                            daha aşık ediyor.</div>
                     </div>
                 </div>
                 <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="flip-inner">
                         <div class="flip-front">Sesin 🎶</div>
-                        <div class="flip-back">Ne zaman moralim bozulsa, sesini duymak tüm dünyayı susturup kalbimi huzurla dolduruyor.</div>
+                        <div class="flip-back">Ne zaman moralim bozulsa, sesini duymak tüm dünyayı susturup kalbimi
+                            huzurla dolduruyor.</div>
                     </div>
                 </div>
                 <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="flip-inner">
                         <div class="flip-front">Kokun 🌸</div>
-                        <div class="flip-back">Bana sarıldığında duyduğum o koku, kendimi en güvende hissettiğim evimin ta kendisi.</div>
+                        <div class="flip-back">Bana sarıldığında duyduğum o koku, kendimi en güvende hissettiğim evimin
+                            ta kendisi.</div>
                     </div>
                 </div>
                 <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="flip-inner">
                         <div class="flip-front">İnancın 🌟</div>
-                        <div class="flip-back">Benim bile kendime inanmadığım anlarda ellerimden tutup beni ayağa kaldırman...</div>
+                        <div class="flip-back">Benim bile kendime inanmadığım anlarda ellerimden tutup beni ayağa
+                            kaldırman...</div>
                     </div>
                 </div>
             </div>
@@ -1399,7 +1453,7 @@
         <div class="glass">
             <h2>Sevgimin Kavanozu 🫙</h2>
             <p>Aşağıdaki butona bas ve içinden senin için rastgele bir not çek...</p>
-            
+
             <div class="jar-container">
                 <div class="jar">
                     <div class="jar-lid"></div>
@@ -1409,8 +1463,9 @@
                 </div>
                 <div class="flying-note" id="flyingNote">Burası Not Alanı</div>
             </div>
-            
-            <button class="send-btn" style="margin-top:20px; width:auto; padding: 15px 30px;" onclick="drawJarNote(event)">İçinden Bir Not Çek 🥠</button>
+
+            <button class="send-btn" style="margin-top:20px; width:auto; padding: 15px 30px;"
+                onclick="drawJarNote(event)">İçinden Bir Not Çek 🥠</button>
         </div>
     </section>
 
@@ -1926,8 +1981,8 @@
         // --- KAZI KAZAN JS LİSTESİ ---
         document.addEventListener("DOMContentLoaded", () => {
             const container = document.getElementById('scratchContainer');
-            if(!container) return;
-            
+            if (!container) return;
+
             // Kartların yerini her açılışta karıştır (Shuffle)
             const cardsArray = Array.from(container.children);
             for (let i = cardsArray.length - 1; i > 0; i--) {
@@ -1953,7 +2008,7 @@
                 // Kaplama çizimi
                 ctx.fillStyle = '#94a3b8'; // Gri gümüş
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
+
                 // Kaplama yazısı
                 ctx.font = 'bold 18px sans-serif';
                 ctx.fillStyle = '#f8fafc';
@@ -2005,7 +2060,7 @@
                         canvas.style.opacity = "0";
                         setTimeout(() => {
                             canvas.style.display = 'none';
-                            
+
                             // Ekranın ortasında büyüt
                             document.body.classList.add('has-winner-popup');
                             card.classList.add('winner-popup');
@@ -2015,7 +2070,7 @@
                                 document.body.classList.remove('has-winner-popup');
                                 card.classList.remove('winner-popup');
                             }, { once: true });
-                            
+
                             createExplosion(window.innerWidth / 2, window.innerHeight / 2, 30, ['🎁', '✨', '💙', '🎉', '🎊']);
                         }, 600);
                     }
@@ -2046,8 +2101,8 @@
                     const pos = getPointerPos(e);
                     ctx.beginPath();
                     ctx.moveTo(pos.x, pos.y);
-                }, {passive: false});
-                canvas.addEventListener('touchmove', scratch, {passive: false});
+                }, { passive: false });
+                canvas.addEventListener('touchmove', scratch, { passive: false });
                 canvas.addEventListener('touchend', () => { isDrawing = false; });
             });
         });
@@ -2073,22 +2128,22 @@
 
         function drawJarNote(e) {
             const noteEl = document.getElementById('flyingNote');
-            
+
             // Eğer zaten animasyondaysa bekle
-            if(noteEl.classList.contains('show')) return;
+            if (noteEl.classList.contains('show')) return;
 
             const randomNote = jarNotes[Math.floor(Math.random() * jarNotes.length)];
             noteEl.innerText = randomNote;
-            
+
             noteEl.classList.add('show');
-            
+
             // Konfeti / Kalp patlat
-            if(e) {
+            if (e) {
                 createExplosion(e.clientX, e.clientY, 20, ["💌", "✨", "🤍", "🫙"]);
             } else {
                 createExplosion(window.innerWidth / 2, window.innerHeight / 2, 20, ["💌", "✨", "🤍"]);
             }
-            
+
             // Animasyon bitince class'ı temizle
             setTimeout(() => {
                 noteEl.classList.remove('show');
