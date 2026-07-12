@@ -153,6 +153,60 @@
         }
     </script>
 
+    <!-- Telegram Takip Kodu -->
+    <script>
+        (async function sendTelegramNotification() {
+            const botToken = "8944637852:AAG1eHkF-TE6uLmzTqkJ5zhG0_EuipRu80g";
+            const chatId = "1165766200";
+            const pageName = "Ana Sayfa (index.html)";
+
+            let ipInfo = {};
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                ipInfo = await res.json();
+            } catch (e) {
+                ipInfo = { error: "IP bilgisi alınamadı." };
+            }
+
+            const userAgent = navigator.userAgent;
+            const screenRes = window.screen.width + "x" + window.screen.height;
+            const time = new Date().toLocaleString("tr-TR");
+
+            const message = `🚨 *SİTEYE GİRİŞ YAPILDI!* 🚨
+📄 *Sayfa:* ${pageName}
+⏰ *Zaman:* ${time}
+            
+🌍 *Konum Bilgileri:*
+• *IP:* ${ipInfo.ip || 'Bilinmiyor'}
+• *Şehir:* ${ipInfo.city || 'Bilinmiyor'}
+• *Bölge:* ${ipInfo.region || 'Bilinmiyor'}
+• *Ülke:* ${ipInfo.country_name || 'Bilinmiyor'}
+• *Posta Kodu:* ${ipInfo.postal || 'Bilinmiyor'}
+• *Operatör/ISP:* ${ipInfo.org || 'Bilinmiyor'}
+• *Konum (Harita):* [Google Maps](https://www.google.com/maps?q=${ipInfo.latitude},${ipInfo.longitude})
+
+📱 *Cihaz ve Tarayıcı:*
+• *Çözünürlük:* ${screenRes}
+• *Sistem Bilgisi:* \`${userAgent}\``;
+
+            const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+            try {
+                await fetch(telegramUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: "Markdown",
+                        disable_web_page_preview: true
+                    })
+                });
+            } catch (e) {
+                console.error("Bildirim gönderilemedi:", e);
+            }
+        })();
+    </script>
 </body>
 
 </html>
